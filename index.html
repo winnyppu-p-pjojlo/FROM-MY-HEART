@@ -1,0 +1,637 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Itim&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #ff69b4;
+    --light: #ffb6d9;
+    --purple: #c77dff;
+}
+
+body {
+    font-family: 'Prompt', sans-serif;
+    background: #100817;
+    color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+    radial-gradient(circle at 20% 20%, #71245c 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, #45175c 0%, transparent 40%),
+    linear-gradient(135deg, #100817, #230d29, #16091f);
+}
+
+.glow {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: #ff38a5;
+    filter: blur(130px);
+    opacity: .22;
+    z-index: -1;
+    animation: float 7s infinite alternate;
+    pointer-events: none;
+}
+
+.glow.one { top: 5%; left: -100px; }
+.glow.two { bottom: 5%; right: -100px; background: #a855f7; }
+
+@keyframes float {
+    to { transform: translate(80px, 60px); }
+}
+
+/* PARTICLES */
+.particle {
+    position: fixed;
+    color: #ff8bc7;
+    opacity: .5;
+    pointer-events: none;
+    animation: rise linear infinite;
+    z-index: -1;
+}
+
+@keyframes rise {
+    from { transform: translateY(110vh) rotate(0); }
+    to { transform: translateY(-10vh) rotate(360deg); }
+}
+
+/* MAIN */
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+}
+
+.screen {
+    width: 100%;
+    max-width: 750px;
+    text-align: center;
+    animation: appear 1s ease;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden { display: none; }
+
+/* GLASS CARD */
+.card {
+    padding: 45px 30px;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 30px;
+    background: rgba(255,255,255,.055);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 50px rgba(255,50,160,.12);
+}
+
+.tag {
+    display: inline-block;
+    padding: 8px 18px;
+    border: 1px solid #ff70b8;
+    border-radius: 50px;
+    color: #ffacd4;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: clamp(32px, 7vw, 58px);
+    font-weight: 600;
+    color: #ffb5da;
+    text-shadow: 0 0 25px #ff4fa8;
+}
+
+.subtitle {
+    color: #d9b7d2;
+    margin-top: 15px;
+    line-height: 2;
+    font-size: 15px;
+}
+
+.big-heart {
+    font-size: 90px;
+    margin: 20px 0;
+    display: inline-block;
+    animation: heartbeat 1.5s infinite;
+    filter: drop-shadow(0 0 20px #ff399e);
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* BUTTON */
+button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-family: 'Prompt', sans-serif;
+    transition: .3s;
+}
+
+.main-btn {
+    padding: 14px 35px;
+    margin-top: 30px;
+    border-radius: 50px;
+    background: linear-gradient(90deg, #ff4fa8, #c77dff);
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 0 25px rgba(255,70,170,.45);
+}
+
+.main-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 40px #ff4fa8;
+}
+
+/* MESSAGE */
+.message-box {
+    text-align: left;
+    line-height: 2.1;
+    color: #f4d9eb;
+    font-size: 15px;
+    margin-top: 25px;
+    white-space: normal;
+}
+
+.highlight {
+    color: #ff9dcc;
+    font-weight: 600;
+}
+
+/* DECORATION */
+.divider {
+    width: 80px;
+    height: 3px;
+    margin: 25px auto;
+    background: linear-gradient(90deg, transparent, #ff72b9, transparent);
+}
+
+.love-counter {
+    margin-top: 25px;
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(255,100,180,.08);
+    border: 1px solid rgba(255,130,190,.2);
+}
+
+.love-counter span {
+    display: block;
+    font-size: 12px;
+    color: #d9a9cb;
+    letter-spacing: 2px;
+}
+
+.love-counter strong {
+    display: block;
+    font-size: 23px;
+    color: #ffacd4;
+    margin-top: 8px;
+}
+
+.footer {
+    margin-top: 25px;
+    color: #9d7e9c;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+/* HEART EXPLOSION */
+.flying-heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    animation: explode 1.8s ease-out forwards;
+}
+
+@keyframes explode {
+    0% { opacity: 1; transform: translateY(0) scale(.5); }
+    100% { opacity: 0; transform: translateY(-250px) scale(2) rotate(35deg); }
+}
+
+/* MUSIC PLAYER */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 16px;
+    min-width: 240px;
+
+    border: 1px solid rgba(255,150,210,.4);
+    border-radius: 20px;
+
+    background: rgba(40,15,45,.85);
+    backdrop-filter: blur(20px);
+
+    box-shadow: 0 0 20px rgba(255,70,170,.25);
+}
+
+.music-disc {
+    width: 43px;
+    height: 43px;
+    min-width: 43px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+    background: linear-gradient(135deg,#ff4fa8,#a855f7);
+
+    color: white;
+    font-size: 22px;
+
+    box-shadow: 0 0 15px #ff4fa8;
+}
+
+.music-disc.playing {
+    animation: musicSpin 3s linear infinite;
+}
+
+@keyframes musicSpin {
+    to { transform: rotate(360deg); }
+}
+
+.music-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.music-name {
+    font-size: 12px;
+    color: #ffb6dc;
+    font-weight: 600;
+}
+
+.music-status {
+    font-size: 10px;
+    color: #c9a4c8;
+    margin-top: 5px;
+}
+
+.music-btn {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+
+    border-radius: 50%;
+    background: linear-gradient(135deg,#ff4fa8,#c77dff);
+
+    color: white;
+    font-size: 15px;
+}
+
+.music-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 25px #ff69b4;
+}
+
+/* RESPONSIVE */
+@media(max-width:500px) {
+    .card { padding: 35px 22px; }
+    .message-box { font-size: 14px; }
+
+    .music-player {
+        bottom: 12px;
+        right: 12px;
+        min-width: 215px;
+        padding: 10px 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+<div class="glow one"></div>
+<div class="glow two"></div>
+
+<div class="container">
+
+<!-- SCREEN 1 -->
+<section class="screen" id="screen1">
+    <div class="card">
+
+        <div class="tag">✦ A SPECIAL MESSAGE FOR YOU ✦</div>
+
+        <div class="big-heart">💗</div>
+
+        <h1>Hey, My Love</h1>
+
+        <p class="subtitle">
+            มีบางอย่างที่อยากบอกเธอ<br>
+            เป็นข้อความเล็ก ๆ จากหัวใจดวงหนึ่ง<br>
+            ที่ยังรักเธอเหมือนเดิมเสมอ
+        </p>
+
+        <div class="divider"></div>
+
+        <p style="color:#ffb6d9;font-size:14px">
+            Are you ready, my princess? ♡
+        </p>
+
+        <button class="main-btn" onclick="startLove()">
+            เปิดอ่านข้อความ 💌
+        </button>
+
+        <div class="footer">MADE WITH 100% LOVE</div>
+
+    </div>
+</section>
+
+<!-- SCREEN 2 -->
+<section class="screen hidden" id="screen2">
+    <div class="card">
+
+        <div class="tag">✦ FROM MY HEART ✦</div>
+
+        <h1 style="font-size:35px">
+            ถึงคนสำคัญของเค้า 💗
+        </h1>
+
+        <div class="divider"></div>
+
+        <div class="message-box" id="typing"></div>
+
+        <button class="main-btn" onclick="showLast()">
+            มีอีกเรื่องอยากบอกเธอ 💗
+        </button>
+
+        <div class="footer">YOU ARE MY FAVORITE PERSON</div>
+    </div>
+</section>
+
+<!-- SCREEN 3 -->
+<section class="screen hidden" id="screen3">
+    <div class="card">
+
+        <div class="tag">✦ OUR LITTLE UNIVERSE ✦</div>
+
+        <div class="big-heart">🫶🏻</div>
+
+        <h1 style="font-size:36px">
+            #คิดถึงตอนรักกันแรกๆ
+        </h1>
+
+        <div class="divider"></div>
+
+        <div class="message-box" style="text-align:center">
+
+            <p>
+                คิดถึงช่วงเวลาที่เราต่างก็ตื่นเต้น
+                ที่จะได้คุยกัน คิดถึงรอยยิ้ม
+                และความรู้สึกดี ๆ ในทุกวัน
+            </p>
+
+            <br>
+
+            <p>
+                เค้าอยากให้เรากลับมาดูแลความรู้สึกกัน
+                เหมือนวันแรก ๆ อีกครั้ง
+                ไม่ใช่เพราะอยากย้อนเวลากลับไป
+                แต่เพราะอยากสร้างวันดี ๆ กับเธอต่อจากนี้
+            </p>
+
+            <br>
+
+            <p class="highlight">
+                เค้าไม่อยากให้ความเคยชิน
+                ทำให้เราลืมใส่ใจกันเลยนะ 💗
+            </p>
+
+        </div>
+
+        <div class="love-counter">
+            <span>MY HEART BELONGS TO YOU</span>
+            <strong>FOREVER & ALWAYS ♡</strong>
+        </div>
+
+        <button class="main-btn" onclick="sendLove()">
+            กดรับหัวใจจากเค้า 💝
+        </button>
+
+        <p id="finalText" style="margin-top:25px;color:#ffacd4"></p>
+
+        <div class="footer">
+            ENDLESS LOVE • JUST FOR YOU
+        </div>
+
+    </div>
+</section>
+
+</div>
+
+<!-- MUSIC PLAYER -->
+<div class="music-player">
+
+    <div class="music-disc" id="musicDisc">♫</div>
+
+    <div class="music-info">
+        <div class="music-name">Our Love Song 💗</div>
+        <div class="music-status" id="musicStatus">
+            Ready to play...
+        </div>
+    </div>
+
+    <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
+        ▶
+    </button>
+
+    <audio id="loveMusic" loop preload="auto">
+        <source src="love-song.mp4" type="audio/mpeg">
+    </audio>
+
+</div>
+
+<script>
+
+// PARTICLES
+for(let i=0; i<35; i++){
+    let p = document.createElement('div');
+    p.className = 'particle';
+    p.innerHTML = Math.random() > .5 ? '♡' : '✦';
+    p.style.left = Math.random()*100+'%';
+    p.style.animationDuration = (5+Math.random()*10)+'s';
+    p.style.animationDelay = Math.random()*8+'s';
+    p.style.fontSize = (10+Math.random()*18)+'px';
+    document.body.appendChild(p);
+}
+
+// CHANGE SCREEN
+function changeScreen(oldScreen,newScreen){
+    document.getElementById(oldScreen).classList.add('hidden');
+    document.getElementById(newScreen).classList.remove('hidden');
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// MESSAGE
+const messages = [
+`เค้าขอโทษนะที่บางครั้งเค้าทำตัวไม่ดีใส่เธอ
+ขอโทษที่บางครั้งใช้อารมณ์มากกว่าความเข้าใจ
+ขอโทษที่อาจทำให้เธอต้องเสียใจ
+ทั้งที่เธอไม่ควรต้องมาเจออะไรแบบนั้นเลย
+
+เค้ารู้ว่าคำขอโทษอาจไม่ได้ทำให้ทุกอย่างดีขึ้นทันที
+แต่เค้าอยากให้เธอรู้ว่าเค้าเสียใจกับสิ่งที่เกิดขึ้นจริง ๆ
+
+เค้าขอบคุณเธอมากนะที่ยังอยู่ตรงนี้
+ขอบคุณที่ผ่านเรื่องราวต่าง ๆ มาด้วยกัน
+และขอบคุณสำหรับความรักที่เธอมอบให้เค้า
+
+บางครั้งเค้าก็คิดถึงตอนที่เรารักกันแรก ๆ
+ตอนที่เราต่างพยายามทำให้อีกคนยิ้ม
+ตอนที่แค่ได้คุยกันก็มีความสุขแล้ว
+
+เค้าไม่อยากให้ความสัมพันธ์ของเรา
+กลายเป็นสิ่งที่เรามองข้ามไปเพราะความเคยชิน
+
+เค้าอยากกลับมาใส่ใจเธอให้มากขึ้น
+อยากรับฟังเธอให้มากกว่าเดิม
+และอยากเป็นพื้นที่ปลอดภัยที่เธอสามารถมีความสุขได้
+
+เค้าอาจไม่ได้เป็นคนที่สมบูรณ์แบบ
+แต่เค้าจะพยายามปรับปรุงตัวเองให้ดีขึ้น
+ไม่ใช่แค่พูดให้เธอฟัง แต่จะค่อย ๆ ทำให้เธอเห็นด้วย
+
+สุดท้ายนี้ เค้าอยากบอกว่า...
+
+เค้ายังรักเธอมาก ๆ เลยนะ
+และยังอยากมีเธออยู่ในทุก ๆ วันของเค้าต่อไป 💗`
+];
+
+// TYPE MESSAGE
+let typingTimer;
+
+function typeMessage(){
+    const box = document.getElementById('typing');
+    const text = messages[0];
+    let index = 0;
+
+    clearInterval(typingTimer);
+    box.innerHTML = '';
+
+    typingTimer = setInterval(()=>{
+        if(index < text.length){
+            box.innerHTML = text.substring(0,index+1)
+                .replace(/\n/g,'<br>');
+            index++;
+        } else {
+            clearInterval(typingTimer);
+        }
+    },35);
+}
+
+// START
+function startLove(){
+    changeScreen('screen1','screen2');
+    typeMessage();
+    playMusic();
+}
+
+// LAST SCREEN
+function showLast(){
+    clearInterval(typingTimer);
+    changeScreen('screen2','screen3');
+}
+
+// HEART EFFECT
+function sendLove(){
+
+    for(let i=0;i<35;i++){
+        let heart = document.createElement('div');
+        heart.className = 'flying-heart';
+        heart.innerHTML = ['💗','💕','💖','💘','🌷'][Math.floor(Math.random()*5)];
+
+        heart.style.left = Math.random()*100+'vw';
+        heart.style.top = (50+Math.random()*40)+'vh';
+        heart.style.fontSize = (20+Math.random()*25)+'px';
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>heart.remove(),2000);
+    }
+
+    document.getElementById('finalText').innerHTML =
+    'ได้รับหัวใจทั้งหมดจากเค้าแล้วนะ รักที่สุดเลย 💗🥺';
+}
+
+// =========================
+// MUSIC SYSTEM
+// =========================
+
+const loveAudio = document.getElementById('loveMusic');
+const musicButton = document.getElementById('musicBtn');
+const musicDisc = document.getElementById('musicDisc');
+const musicStatusText = document.getElementById('musicStatus');
+
+async function playMusic(){
+
+    try {
+        await loveAudio.play();
+
+        musicButton.innerHTML = 'Ⅱ';
+        musicDisc.classList.add('playing');
+        musicStatusText.innerHTML = 'Now Playing ♡';
+
+    } catch(error) {
+
+        musicButton.innerHTML = '▶';
+        musicDisc.classList.remove('playing');
+        musicStatusText.innerHTML = 'แตะเล่นเพลงอีกครั้งนะ 💗';
+
+    }
+}
+
+function toggleMusic(){
+
+    if(loveAudio.paused){
+        playMusic();
+    } else {
+        loveAudio.pause();
+
+        musicButton.innerHTML = '▶';
+        musicDisc.classList.remove('playing');
+        musicStatusText.innerHTML = 'Paused ♡';
+    }
+}
+
+loveAudio.addEventListener('error',()=>{
+    musicStatusText.innerHTML = 'ไม่พบไฟล์เพลง';
+});
+
+</script>
+
+</body>
+</html>
